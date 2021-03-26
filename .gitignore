@@ -1,0 +1,14 @@
+# Blacklist everything
+*/**
+
+# Whitelist submodules
+!deps/dotdotdot
+
+# Whitelist config and build scripts
+!.gitignore
+!Makefile
+
+# Whitelist the sourceode and docs
+!*.md
+!*.c
+!*.h
