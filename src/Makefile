@@ -1,5 +1,5 @@
-COMPILER = gcc
-COMPILER_FLAGS = -g -Wall -Werror
+COMPILER = clang
+COMPILER_FLAGS = -g -Wall #-Werror
 LINKER_FLAGS = -lncursesw -lm
 
 PROG_NAME = swirl
