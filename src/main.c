@@ -15,30 +15,39 @@ int main(int argc, char** argv)
     double time_max = 100;
     double time_delta = 0.1; 
 
-    nparticle* np = nparticle_generate_random(10);
+    nparticle* np = nparticle_generate_random(10, width, height);
 
-    for (double i = 0.0; i < time_max; i += time_delta)
-    {
-        // Compute particle position, velocity & forces etc
-        nparticle_simulate_bruteforce(np, time_delta);
-
-        // Render particles to grid
-    
-    }
-
-    nparticle_free(np);
-
-    /*
     grid *g = grid_new(width, height);
     renderer_new(g);
 
     while (1)
     {
         grid_clear(g);
-        grid_draw_border(g, 1);
+        
+        for (double i = 0.0; i < time_max; i += time_delta)
+        {
+            // Compute particle position, velocity & forces etc
+            nparticle_simulate_bruteforce(np, time_delta);
+
+            // Render particles to grid
+            grid_clear(g);
+
+            for (int j = 0; j < np->n; j++)
+            {
+                int pos_x = (int)np->particles[j]->pos_x;
+                int pos_y = (int)np->particles[j]->pos_y;
+
+                //printf("%i %i\n", pos_x, pos_y);
+                if(pos_x < width && pos_y < height)
+                    grid_set_pixel(g, pos_x, pos_y);
+            }
+            //printf("------------\n");
+        }
+
         renderer_update(g);
     }
-    */
+
+    nparticle_free(np);
 
     return 0;
 }

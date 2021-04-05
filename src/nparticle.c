@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include <math.h>
 
-nparticle *nparticle_generate_random(int n)
+nparticle *nparticle_generate_random(int n, int grid_width, int grid_height)
 {
     nparticle *nparticle = malloc(sizeof(nparticle));
     if (nparticle == NULL) return NULL;
@@ -12,8 +12,8 @@ nparticle *nparticle_generate_random(int n)
     if (particles == NULL) return NULL;
 
     double mass_blackhole = 10e34;
-    double mass_star = 10;
-    double radius_star = 5e08;
+    double mass_star = 5e08;
+    double radius_star = 10;
 
     nparticle->radius = radius_star;
     nparticle->n = n;
@@ -21,20 +21,22 @@ nparticle *nparticle_generate_random(int n)
     //nparticle->bhtree = NULL:
 
     // Create black hole (particle with high mass)
-    particles[0] = particle_create(mass_blackhole, 0.0, 0.0, 0, 0);
+    particles[0] = particle_create(mass_blackhole, grid_width / 2, grid_height / 2, 0, 0);
 
     // Create stars (particles with low mass)
     for (int i = 0; i < n; i++)
     {
         // Choose random position for the stars
-        double rx = ((double)rand() / (double)RAND_MAX * 2 * radius_star - radius_star);
-		double ry = ((double)rand() / (double)RAND_MAX * 2 * radius_star - radius_star);
+        //double rx = ((double)rand() / (double)RAND_MAX * 2 * radius_star - radius_star);
+		//double ry = ((double)rand() / (double)RAND_MAX * 2 * radius_star - radius_star);
+        double rx = (double)(rand() % grid_width);
+		double ry = (double)(rand() % grid_height);
 
         // Set velocity perpindicular to black hole, to ensure an orbit around the black hole
-        double vx = -(ry/rx);
+        double vx = 1.0; //-(ry/rx);
 		double vy = 1.0;
-        double br = 1.0 - 2.0 * (rand() % 2);
-		double rnv = br * ((double)rand() / (double)RAND_MAX * 2 * radius_star) / (5 * sqrt(vx * vx + vy * vy));
+        //double br = 1.0 - 2.0 * (rand() % 2);
+		double rnv = 1; // br * ((double)rand() / (double)RAND_MAX * 2 * radius_star) / (5 * sqrt(vx * vx + vy * vy));
 		
 		vx = rnv * vx;
 		vy = rnv * vy;
