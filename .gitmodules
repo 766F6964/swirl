@@ -1,3 +1,3 @@
 [submodule "deps/dotdotdot"]
 	path = deps/dotdotdot
-	url = git@github.com:766F6964/dotdotdotgit
+	url = git@github.com:766F6964/dotdotdot.git

@@ -7,10 +7,11 @@ typedef struct
 {
     particle **particles;
     int n; // Amount of particles
+    double radius;
 
-} n_particle;
+} nparticle;
 
-n_particle *nparticle_generate_random(int n);
-void nparticle_free(n_particle *np);
+nparticle *nparticle_generate_random(int n);
+void nparticle_free(nparticle *np);
 
 #endif

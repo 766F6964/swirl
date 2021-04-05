@@ -2,14 +2,19 @@
 #include "particle.h"
 #include <stdlib.h>
 
-n_particle *nparticle_generate_random(int n)
+nparticle *nparticle_generate_random(int n)
 {
-    n_particle *particles = malloc(sizeof(n_particle));
-    particles **particles = malloc(sizeof(n_particle));
-    return NULL;
+    nparticle *nparticle = malloc(sizeof(nparticle));
+    particle **particles = malloc(sizeof(nparticle) * n);
+
+    nparticle->radius = 5e08;
+    nparticle->n = n;
+    nparticle->particles = particles;
+
+    return nparticle;
 }
 
-void nparticle_free(n_particle *np)
+void nparticle_free(nparticle *np)
 {
     for (int i = 0; i < np->n; i++)
     {
