@@ -12,6 +12,9 @@ typedef struct
 } nparticle;
 
 nparticle *nparticle_generate_random(int n);
+void nparticle_simulate_bruteforce(nparticle* p, double dt);
+
+
 void nparticle_free(nparticle *np);
 
 #endif
