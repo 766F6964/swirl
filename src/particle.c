@@ -46,7 +46,7 @@ double particle_get_vel_x(particle *p)
 
 double particle_get_vel_y(particle *p)
 {
-    return p->vel_x;
+    return p->vel_y;
 }
 
 double particle_get_distance(particle *p1, particle *p2)

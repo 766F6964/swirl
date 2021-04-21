@@ -26,12 +26,16 @@ int main(int argc, char** argv)
         
         for (double i = 0.0; i < time_max; i += time_delta)
         {
+            // Clear previous drawn frame
+            grid_clear(g);
+
+            // Draw border
+            grid_draw_border(g, 1);
+
             // Compute particle position, velocity & forces etc
             nparticle_simulate_bruteforce(np, time_delta);
 
             // Render particles to grid
-            grid_clear(g);
-
             for (int j = 0; j < np->n; j++)
             {
                 int pos_x = (int)np->particles[j]->pos_x;
@@ -41,7 +45,9 @@ int main(int argc, char** argv)
                 if(pos_x < width && pos_y < height)
                     grid_set_pixel(g, pos_x, pos_y);
             }
-            //printf("------------\n");
+
+            // Draw changes to screen
+            renderer_update(g);
         }
 
         renderer_update(g);

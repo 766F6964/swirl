@@ -2,6 +2,7 @@
 #include "particle.h"
 #include <stdlib.h>
 #include <math.h>
+#include <time.h>
 
 nparticle *nparticle_generate_random(int n, int grid_width, int grid_height)
 {
@@ -23,6 +24,9 @@ nparticle *nparticle_generate_random(int n, int grid_width, int grid_height)
     // Create black hole (particle with high mass)
     particles[0] = particle_create(mass_blackhole, grid_width / 2, grid_height / 2, 0, 0);
 
+    // Initialize random
+    srand(time(NULL));
+
     // Create stars (particles with low mass)
     for (int i = 0; i < n; i++)
     {
@@ -33,10 +37,10 @@ nparticle *nparticle_generate_random(int n, int grid_width, int grid_height)
 		double ry = (double)(rand() % grid_height);
 
         // Set velocity perpindicular to black hole, to ensure an orbit around the black hole
-        double vx = 1.0; //-(ry/rx);
+        double vx = - (ry/rx); // 1.0;
 		double vy = 1.0;
-        //double br = 1.0 - 2.0 * (rand() % 2);
-		double rnv = 1; // br * ((double)rand() / (double)RAND_MAX * 2 * radius_star) / (5 * sqrt(vx * vx + vy * vy));
+        double br = 1.0 - 2.0 * (rand() % 2);
+		double rnv =  br * ((double)rand() / (double)RAND_MAX * 2 * radius_star) / (5 * sqrt(vx * vx + vy * vy)); // 1;
 		
 		vx = rnv * vx;
 		vy = rnv * vy;
