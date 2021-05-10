@@ -8,8 +8,7 @@
 
 // References: https://github.com/iSach/nbody-c
 
-int main(int argc, char** argv)
-{
+int main(int argc, char **argv) {
     // Initialize the logger
     log_use_time_prefix(false);
     log_use_short_prefix(true);
@@ -19,21 +18,20 @@ int main(int argc, char** argv)
 
     int width = 100;
     int height = 100;
-    
-    double time_max = 100;
-    double time_delta = 0.05;
 
-    nparticle* np = nparticle_generate_random(30, width, height);
+    double time_max = 100;
+    double time_delta = 0.1;
+
+    //nparticle* np = nparticle_generate_random(30, width, height);
+    nparticle *np = nparticle_generate_from_file("galaxy1.txt");
 
     grid *g = grid_new(width, height);
     renderer_new(g);
 
-    while (1)
-    {
+    while (1) {
         grid_clear(g);
-        
-        for (double i = 0.0; i < time_max; i += time_delta)
-        {
+
+        for (double i = 0.0; i < time_max; i += time_delta) {
             // Clear previous drawn frame
             grid_clear(g);
 
@@ -44,19 +42,17 @@ int main(int argc, char** argv)
             nparticle_simulate_bruteforce(np, time_delta);
 
             // Render particles to grid
-            for (int j = 0; j < np->n; j++)
-            {
-                int pos_x = (int)np->particles[j]->pos_x;
-                int pos_y = (int)np->particles[j]->pos_y;
+            for (int j = 0; j < np->n; j++) {
 
-                //printf("%i %i\n", pos_x, pos_y);
-                if(pos_x < width && pos_x > 0 && pos_y < height && pos_y > 0)
-                {
-                    // Note: Sementationfault occurs because casting fails on small/negative values?
-                    log_info("Rendering particle at position (%f, %f)", pos_x, pos_y);
+                // Clamp coordinates to grid width and height
+                int pos_x = (((int) np->particles[j]->pos_x + np->radius) /
+                             (2 * np->radius) * (double) width);
+                int pos_y = (((height - (int) np->particles[j]->pos_y) + np->radius) /
+                             (2 * np->radius) * (double) height);
+
+                if (pos_x < width && pos_x > 0 && pos_y < height && pos_y > 0) {
                     grid_set_pixel(g, pos_x, pos_y);
                 }
-
             }
 
             // Draw changes to screen

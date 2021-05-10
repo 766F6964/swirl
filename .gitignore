@@ -8,6 +8,9 @@
 !.gitignore
 !Makefile
 
+# Whitelist data files
+!*.txt
+
 # Whitelist the sourceode and docs
 !*.md
 !*.c

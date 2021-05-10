@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <math.h>
 #include <time.h>
+#include <stdio.h>
 #include "../deps/log/src/log.h"
 
 nparticle *nparticle_generate_random(int n, int grid_width, int grid_height)
@@ -53,6 +54,36 @@ nparticle *nparticle_generate_random(int n, int grid_width, int grid_height)
     return nparticle;
 }
 
+nparticle *nparticle_generate_from_file(char* file_name)
+{
+    FILE *fp = fopen(file_name,"r");
+
+    // read number of bodies
+    int n;
+    fscanf(fp, "%d", &n);
+
+    double radius;
+    fscanf(fp, "%lf", &radius);
+
+    nparticle *nbody = malloc(sizeof(nparticle));
+    particle **bodies = malloc(n*sizeof(particle *));
+    nbody->particles = bodies;
+    nbody->n = n;
+    nbody->radius = radius;
+    //nbody->tree = NULL;
+
+    for (int i = 0; i < n; i++) {
+        double rx, ry, vx, vy, mass;
+        fscanf(fp,"%lf",&rx);
+        fscanf(fp,"%lf",&ry);
+        fscanf(fp,"%lf",&vx);
+        fscanf(fp,"%lf",&vy);
+        fscanf(fp,"%lf",&mass);
+        bodies[i] = particle_create(mass, rx, ry, vx, vy);
+    }
+    return nbody;
+}
+
 void nparticle_simulate_bruteforce(nparticle* p, double dt)
 {
     int n = p->n;
@@ -68,7 +99,6 @@ void nparticle_simulate_bruteforce(nparticle* p, double dt)
                 particle_compute_forces(p->particles[i], p->particles[j]);
             }
         }
-
     }
 
     // Update particles
