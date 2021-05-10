@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <math.h>
 #include <time.h>
+#include "../deps/log/src/log.h"
 
 nparticle *nparticle_generate_random(int n, int grid_width, int grid_height)
 {
@@ -55,6 +56,8 @@ nparticle *nparticle_generate_random(int n, int grid_width, int grid_height)
 void nparticle_simulate_bruteforce(nparticle* p, double dt)
 {
     int n = p->n;
+
+    log_info("Computing particle bruteforce");
 
     // Update forces between particles
     for (int i = 0; i < n; i++)

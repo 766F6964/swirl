@@ -4,11 +4,19 @@
 #include "nparticle.h"
 #include "../deps/dotdotdot/src/grid.h"
 #include "../deps/dotdotdot/src/renderer.h"
+#include "../deps/log/src/log.h"
 
 // References: https://github.com/iSach/nbody-c
 
 int main(int argc, char** argv)
 {
+    // Initialize the logger
+    log_use_time_prefix(false);
+    log_use_short_prefix(true);
+    log_use_colored_prefix(false);
+    log_set_mode(LOGFILE);
+    log_set_filename("errors.log");
+
     int width = 100;
     int height = 100;
     

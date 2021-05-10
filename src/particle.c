@@ -2,6 +2,8 @@
 #include <stddef.h>
 #include <stdlib.h>
 #include <math.h>
+#include "../deps/log/src/log.h"
+
 
 particle *particle_create(double mass, double px, double py, double vx, double vy)
 {
@@ -10,7 +12,7 @@ particle *particle_create(double mass, double px, double py, double vx, double v
     p->pos_x = px;
     p->pos_y = py;
     p->vel_x = vx;
-    p->vel_x = vy;
+    p->vel_y = vy;
     return p;
 }
 
@@ -66,6 +68,8 @@ void particle_compute_forces(particle *p1, particle *p2)
     double F = (G * p1->mass * p2->mass) / (dist * dist + EPS * EPS);
     p1->force_x += F * dx / dist;
     p1->force_y += F * dy / dist;
+
+    log_success("Particle position: (%i,%i) (%i,%i)", p1->pos_x, p1->pos_y, p2->pos_x, p2->pos_y);
 }
 
 void particle_reset_forces(particle *p)
