@@ -60,7 +60,7 @@ double particle_get_distance(particle *p1, particle *p2)
 
 void particle_compute_forces(particle *p1, particle *p2)
 {
-    double G = 6.67e-11;    // Gravational constant
+    double G = 6.67e-11;    // Gravitational constant
     double EPS = 3E4;       // Softening parameter
     double dx = p2->pos_x - p1->pos_x;
     double dy = p2->pos_y - p1->pos_y;
@@ -69,7 +69,6 @@ void particle_compute_forces(particle *p1, particle *p2)
     p1->force_x += F * dx / dist;
     p1->force_y += F * dy / dist;
 
-    log_success("Particle position: (%i,%i) (%i,%i)", p1->pos_x, p1->pos_y, p2->pos_x, p2->pos_y);
 }
 
 void particle_reset_forces(particle *p)

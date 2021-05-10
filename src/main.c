@@ -21,9 +21,9 @@ int main(int argc, char** argv)
     int height = 100;
     
     double time_max = 100;
-    double time_delta = 0.1; 
+    double time_delta = 0.05;
 
-    nparticle* np = nparticle_generate_random(10, width, height);
+    nparticle* np = nparticle_generate_random(30, width, height);
 
     grid *g = grid_new(width, height);
     renderer_new(g);
@@ -50,8 +50,13 @@ int main(int argc, char** argv)
                 int pos_y = (int)np->particles[j]->pos_y;
 
                 //printf("%i %i\n", pos_x, pos_y);
-                if(pos_x < width && pos_y < height)
+                if(pos_x < width && pos_x > 0 && pos_y < height && pos_y > 0)
+                {
+                    // Note: Sementationfault occurs because casting fails on small/negative values?
+                    log_info("Rendering particle at position (%f, %f)", pos_x, pos_y);
                     grid_set_pixel(g, pos_x, pos_y);
+                }
+
             }
 
             // Draw changes to screen

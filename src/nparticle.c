@@ -33,7 +33,7 @@ nparticle *nparticle_generate_random(int n, int grid_width, int grid_height)
     {
         // Choose random position for the stars
         //double rx = ((double)rand() / (double)RAND_MAX * 2 * radius_star - radius_star);
-		//double ry = ((double)rand() / (double)RAND_MAX * 2 * radius_star - radius_star);
+        //double ry = ((double)rand() / (double)RAND_MAX * 2 * radius_star - radius_star);
         double rx = (double)(rand() % grid_width);
 		double ry = (double)(rand() % grid_height);
 
@@ -57,8 +57,6 @@ void nparticle_simulate_bruteforce(nparticle* p, double dt)
 {
     int n = p->n;
 
-    log_info("Computing particle bruteforce");
-
     // Update forces between particles
     for (int i = 0; i < n; i++)
     {
@@ -70,6 +68,7 @@ void nparticle_simulate_bruteforce(nparticle* p, double dt)
                 particle_compute_forces(p->particles[i], p->particles[j]);
             }
         }
+
     }
 
     // Update particles
