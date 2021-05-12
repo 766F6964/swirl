@@ -3,7 +3,7 @@
 
 #include "particle.h"
 
-typedef struct {
+typedef struct nparticle {
     particle **particles;
     int n; // Amount of particles
     double radius;

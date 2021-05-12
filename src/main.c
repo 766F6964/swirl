@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include "particle.h"
 #include "nparticle.h"
+#include "galaxygen.h"
 #include "../deps/dotdotdot/src/grid.h"
 #include "../deps/dotdotdot/src/renderer.h"
 #include "../deps/log/src/log.h"
@@ -10,11 +11,11 @@
 
 int main(int argc, char **argv) {
     // Initialize the logger
-    log_use_time_prefix(false);
-    log_use_short_prefix(true);
-    log_use_colored_prefix(false);
-    log_set_mode(LOGFILE);
-    log_set_filename("errors.log");
+    // log_use_time_prefix(false);
+    // log_use_short_prefix(true);
+    // log_use_colored_prefix(false);
+    // log_set_mode(LOGFILE);
+    // log_set_filename("errors.log");
 
     int width = 100;
     int height = 100;
@@ -22,8 +23,9 @@ int main(int argc, char **argv) {
     double time_max = 100;
     double time_delta = 0.1;
 
-    //nparticle* np = nparticle_generate_random(30, width, height);
-    nparticle *np = nparticle_generate_from_file("galaxy1.txt");
+
+    generate_galaxy(200, 20, 5, 7, 4.00000E19, 1.60000E24); 
+    nparticle* np = nparticle_generate_from_file("galaxy_gen.txt");
 
     grid *g = grid_new(width, height);
     renderer_new(g);
