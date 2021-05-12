@@ -3,7 +3,7 @@
 
 #include "nparticle.h"
 
-void generate_galaxy(int n, int radius, int x_center, int y_center, double mass_star, double mass_bh);
+void generate_galaxy(int n, int radius, double x_center, double y_center, double mass_star, double mass_bh);
 
 double calculate_perpindicular_velocity();
 

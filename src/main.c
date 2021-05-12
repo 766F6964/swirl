@@ -24,7 +24,7 @@ int main(int argc, char **argv) {
     double time_delta = 0.1;
 
 
-    generate_galaxy(200, 20, 5, 7, 4.00000E19, 1.60000E24); 
+    generate_galaxy(1000, 2.83800E06, 50, 50, 4.00000E19, 1.60000E24); 
     nparticle* np = nparticle_generate_from_file("galaxy_gen.txt");
 
     grid *g = grid_new(width, height);

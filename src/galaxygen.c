@@ -4,7 +4,7 @@
 #include <stdio.h>
 #include <math.h>
 
-void generate_galaxy(int n, int radius, int x_center, int y_center, double mass_star, double mass_bh) 
+void generate_galaxy(int n, int radius, double x_center, double y_center, double mass_star, double mass_bh) 
 {
     FILE *fhandle = fopen("galaxy_gen.txt", "w");
 
@@ -23,7 +23,10 @@ void generate_galaxy(int n, int radius, int x_center, int y_center, double mass_
         double rand_x = x_center + radius * rx;
         double rand_y = y_center + radius * ry;
 
-        fprintf(fhandle, "%lf %lf %lf %lf %lf\n", rand_x, rand_y, vx, vy, x == 0 ? mass_bh : mass_star);
+        if(x == 0)
+            fprintf(fhandle, "%lf %lf %lf %lf %lf\n", x_center, y_center, vx, vy, mass_bh);
+        else
+            fprintf(fhandle, "%lf %lf %lf %lf %lf\n", rand_x, rand_y, vx, vy, mass_star);
     }
     fclose(fhandle);
 }
