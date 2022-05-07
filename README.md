@@ -2,7 +2,7 @@
 
 ## Overview
 _swirl_ is just a little toy project to run n-body simulations in the terminal using pixel art for visualization.
-This entire project is heaviely based on [nobody-c](https://github.com/iSach/nbody-c) from _iSach_, and mostly was developed to learn more about how n-body simulations work.
+This entire project is heaviely based on [nbody-c](https://github.com/iSach/nbody-c) from _iSach_, and mostly was developed to learn more about how n-body simulations work.
 An example of how a simulation can look like is shown below:
 
 ![](img/demo.gif)
