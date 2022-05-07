@@ -16,8 +16,8 @@ int main(int argc, char **argv) {
     log_set_mode(LOGFILE);
     log_set_filename("errors.log");
 
-    int width = 100;
-    int height = 100;
+    int width = 180;
+    int height = 180;
 
     double time_max = 100;
     double time_delta = 0.1;

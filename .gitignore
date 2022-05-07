@@ -4,6 +4,9 @@
 # Whitelist submodules
 !deps/dotdotdot
 
+# Whitelist image folder
+!img/demo.gif
+
 # Whitelist config and build scripts
 !.gitignore
 !Makefile
